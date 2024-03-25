@@ -116,15 +116,20 @@ set<string> direct_routes_find(string source_id,string destination_id,map<string
     return directly_routes;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc < 3) {
+        cerr << "Usage: " << argv[0] << " <source_id> <destination_id>" << endl;
+        return 1;
+    }
+
+    string source_id = argv[1];
+    string destination_id = argv[2];
+
     vector<string> stop_route = readTextFile("C:/Users/saran/ULTRA/Runnables/Question_2/GTFS/stop_route_map.txt");
     vector<string> route_stop = readTextFile("C:/Users/saran/ULTRA/Runnables/Question_2/GTFS/route_stop_map.txt");
-    
     map<string, set<string>> stop_route_map = constructMap(stop_route);
     map<string, set<string>> route_stop_map = constructMap(route_stop);
 
-    string source_id, destination_id; 
-    cin >> source_id >> destination_id;
 
     set<string> directly_routes=direct_routes_find(source_id, destination_id,route_stop_map,stop_route_map);
     set<pair<string,string>>one_switch_routes=routesWithOneChange(source_id,destination_id,stop_route_map,route_stop_map);
