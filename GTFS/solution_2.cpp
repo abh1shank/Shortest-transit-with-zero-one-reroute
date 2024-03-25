@@ -140,6 +140,7 @@ int main(int argc, char* argv[]) {
     
     cout<<"Routes with one change are :\n";
     for(auto routes:one_switch_routes)
-        cout<<routes.first<<" -> "<<routes.second<<"\n";
+        if(routes.first!=routes.second)
+            cout<<routes.first<<" -> "<<routes.second<<"\n";
     return 0;
 }
